@@ -25,9 +25,10 @@ pipeline {
 
         stage('Stop Site') {
             steps {
+                bat 'C:\\Windows\\System32\\inetsrv\\appcmd stop apppool /apppool.name:"Weather_App"'
                 bat 'C:\\Windows\\System32\\inetsrv\\appcmd stop site /site.name:"Weather_App"'
-            }
-        }
+    }
+}
 
         stage('Deploy') {
             steps {
@@ -38,10 +39,10 @@ pipeline {
 
         stage('Start Site') {
             steps {
+                bat 'C:\\Windows\\System32\\inetsrv\\appcmd start apppool /apppool.name:"Weather_App"'
                 bat 'C:\\Windows\\System32\\inetsrv\\appcmd start site /site.name:"Weather_App"'
-            }
-        }
     }
+}
 
     post {
         success { echo 'Deployed successfully.' }
